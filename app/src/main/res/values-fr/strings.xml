@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Appli Film</string>
     <string name="title">Titre</string>
-    <string name="release_date">Date de sortie : %s</string>
-    <string name="welcome">Bienvenue à Toi</string>
+    <string name="release_date">Date de sortie : %1$s</string>
+    <string name="welcome">Bienvenue %1$s</string>
     <string name="popular">Films Populaires</string>
     <string name="search_button">Rechercher</string>
 </resources>

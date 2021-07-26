@@ -11,13 +11,13 @@
         android:background="@color/background"
         >
         <TextView
+            android:id="@+id/text_view_welcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/marge_title"
             android:gravity="center"
             android:textColor="@color/design_default_color_primary"
             android:textSize="@dimen/text_size_large"
-            android:text="@string/welcome"
             />
         <TextView
             android:layout_width="match_parent"
@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/marge"
             android:orientation="horizontal"
+            android:background="@color/white"
             >
             <ImageView
                 android:layout_width="@dimen/image_width"
@@ -61,6 +62,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginBottom="@dimen/marge"
+            android:background="@color/white"
             >
             <ImageView
                 android:layout_width="@dimen/image_width"
@@ -89,6 +91,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/button_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search_button"
