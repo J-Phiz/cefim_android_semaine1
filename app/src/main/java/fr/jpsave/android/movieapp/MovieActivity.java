@@ -11,28 +11,26 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
-import fr.jpsave.android.movieapp.databinding.ActivityMovieBinding;
+import fr.jpsave.android.movieapp.constants.Constants;
 
 public class MovieActivity extends AppCompatActivity {
-
-    private ActivityMovieBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMovieBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_movie);
 
         Log.d("ChezMoi Processus", "MovieActivity: onCreate()");
 
-        Toolbar toolbar = binding.toolbar;
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        CollapsingToolbarLayout toolBarLayout = binding.toolbarLayout;
+        CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
         toolBarLayout.setTitle(getTitle());
 
-        FloatingActionButton fab = binding.fab;
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +38,11 @@ public class MovieActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // Get Params from MainActivity
+        Bundle params = getIntent().getExtras();
+        TextView textViewTitle = findViewById(R.id.text_view_title);
+        textViewTitle.setText(params.getString(Constants.MOVIE_TITLE_KEY));
     }
 
     @Override

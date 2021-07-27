@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import fr.jpsave.android.movieapp.constants.Constants;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextViewWelcome;
@@ -77,16 +79,19 @@ public class MainActivity extends AppCompatActivity {
     public void onClickFilm(View view) {
         LinearLayout linearLayout = (LinearLayout) view;
         String message = "Click on Film ";
+        String filmTitle = "";
 
         if (linearLayout.getId() == R.id.linear_layout_film1) {
-            message += ((TextView) view.findViewById(R.id.text_view_film1)).getText().toString();
-            Intent intent = new Intent(this, MovieActivity.class);
-            startActivity(intent);
+            filmTitle = ((TextView) view.findViewById(R.id.text_view_film1)).getText().toString();
         } else if (linearLayout.getId() == R.id.linear_layout_film2) {
-            message += ((TextView) view.findViewById(R.id.text_view_film2)).getText().toString();
+            filmTitle = ((TextView) view.findViewById(R.id.text_view_film2)).getText().toString();
         }
 
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MovieActivity.class);
+        intent.putExtra(Constants.MOVIE_TITLE_KEY, filmTitle);
+        startActivity(intent);
+
+        Toast.makeText(this, message + filmTitle, Toast.LENGTH_SHORT).show();
     }
 
 }

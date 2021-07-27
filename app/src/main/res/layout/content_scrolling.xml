@@ -8,10 +8,21 @@
     tools:context=".MovieActivity"
     tools:showIn="@layout/activity_movie">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marge"
+            android:text="coucou" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/marge"
+            android:text="@string/large_text" />
+    </LinearLayout>
 </androidx.core.widget.NestedScrollView>
