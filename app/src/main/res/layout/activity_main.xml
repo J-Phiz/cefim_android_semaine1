@@ -31,6 +31,8 @@
             android:layout_marginBottom="@dimen/marge"
             android:orientation="horizontal"
             android:background="@color/white"
+            android:onClick="onClickFilm"
+            android:id="@+id/linear_layout_film1"
             >
             <ImageView
                 android:layout_width="@dimen/image_width"
@@ -49,6 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Star Wars : épisode IV"
+                    android:id="@+id/text_view_film1"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,6 +66,8 @@
             android:orientation="horizontal"
             android:layout_marginBottom="@dimen/marge"
             android:background="@color/white"
+            android:onClick="onClickFilm"
+            android:id="@+id/linear_layout_film2"
             >
             <ImageView
                 android:layout_width="@dimen/image_width"
@@ -81,6 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Batman"
+                    android:id="@+id/text_view_film2"
                     />
                 <TextView
                     android:layout_width="wrap_content"
