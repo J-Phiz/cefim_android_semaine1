@@ -8,5 +8,5 @@
     <string name="search_button">Rechercher</string>
     <string name="large_text">Texte très très grand</string>
     <string name="action_settings">Paramètres</string>
-    <string name="title_activity_movie">Titre de Films</string>
+    <string name="title_activity_movie">Liste des Films</string>
 </resources>
