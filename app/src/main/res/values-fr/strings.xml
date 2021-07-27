@@ -6,4 +6,7 @@
     <string name="welcome">Bienvenue %1$s</string>
     <string name="popular">Films Populaires</string>
     <string name="search_button">Rechercher</string>
+    <string name="large_text">Texte très très grand</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="title_activity_movie">Titre de Films</string>
 </resources>
