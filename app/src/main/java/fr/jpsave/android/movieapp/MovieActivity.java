@@ -17,6 +17,8 @@ import fr.jpsave.android.movieapp.constants.Constants;
 
 public class MovieActivity extends AppCompatActivity {
 
+    private TextView mTvDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,22 +29,31 @@ public class MovieActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Get Params from MainActivity
+        Bundle params = getIntent().getExtras();
         CollapsingToolbarLayout toolBarLayout = findViewById(R.id.toolbar_layout);
-        toolBarLayout.setTitle(getTitle());
+        toolBarLayout.setTitle(params.getString(Constants.MOVIE_TITLE_KEY));
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, R.string.favorite_added, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
         });
 
-        // Get Params from MainActivity
-        Bundle params = getIntent().getExtras();
-        TextView textViewTitle = findViewById(R.id.text_view_title);
-        textViewTitle.setText(params.getString(Constants.MOVIE_TITLE_KEY));
+        mTvDescription = findViewById(R.id.text_view_description);
+        mTvDescription.setText(
+                String.format("%s...", getText(R.string.large_text).subSequence(0, 200))
+        );
+
+    }
+
+    public void showMore(View view) {
+        mTvDescription.setText(getString(R.string.large_text));
     }
 
     @Override

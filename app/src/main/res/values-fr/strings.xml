@@ -6,7 +6,17 @@
     <string name="welcome">Bienvenue %1$s</string>
     <string name="popular">Films Populaires</string>
     <string name="search_button">Rechercher</string>
-    <string name="large_text">Texte très très grand</string>
+    <string name="about">A propos de ce film</string>
+    <string name="large_text">
+        "L'univers de Star Wars se déroule dans une galaxie qui est le théâtre d'affrontements entre les Chevaliers Jedi et les Seigneurs noirs des Sith, personnes sensibles à la Force, un champ énergétique mystérieux leur procurant des pouvoirs psychiques. Les Jedi maîtrisent le Côté lumineux de la Force, pouvoir bénéfique et défensif, pour maintenir la paix dans la galaxie. Les Sith utilisent le Côté obscur, pouvoir nuisible et destructeur, pour leurs usages personnels et pour dominer la galaxie1."
+        "Pour ramener la paix, une République galactique a été fondée avec pour capitale la planète Coruscant. Mais, tout au long de son existence, elle est secouée par des sécessions et des guerres. Pour y mettre fin, la République est remplacée en 19 av. BYNote 2 par un Empire galactique autoritaire et discriminatoire. Cette nouvelle entité est dirigée par le Sith Palpatine, son apprenti Dark Vador et son chef d'état-major Tarkin2."
+        "Cependant, après plusieurs années, la brutalité du régime provoque l'apparition d'une opposition armée : l'Alliance rebelle. Le premier coup d'éclat de cette dernière se déroule quelque temps avant BYNote 3, lorsque des espions rebelles parviennent à mettre la main sur les plans de la station spatiale Étoile noire, une arme absolue que Tarkin construit en secret depuis l’avènement de l’Empire. La princesse Leia, l'une des responsables de l'Alliance, est alors chargée de rapporter en lieu sûr les plans dérobésa 1."
+    </string>
     <string name="action_settings">Paramètres</string>
     <string name="title_activity_movie">Liste des Films</string>
+    <string name="director">Directeur</string>
+    <string name="actors">Acteurs</string>
+    <string name="awards">Récompenses</string>
+    <string name="show_more">Lire la suite</string>
+    <string name="favorite_added">Ajouter à vos favoris</string>
 </resources>

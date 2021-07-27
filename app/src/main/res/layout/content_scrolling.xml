@@ -10,19 +10,143 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/marge"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/marge_title"
+            >
+            <ImageView
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:src="@drawable/star_wars_ep4"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_large"
+                    android:textStyle="bold"
+                    android:text="Star Wars: Episode IV - A New Hope"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25 Mai 1977"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Action, Adventure, Fantasy, Sci-Fi"
+                    />
+            </LinearLayout>
+        </LinearLayout>
         <TextView
-            android:id="@+id/text_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/marge"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"
+            android:text="@string/about"
+            />
+        <TextView
+            android:id="@+id/text_view_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/marge"
-            android:text="coucou" />
-
+            android:layout_marginBottom="@dimen/marge"
+            android:text="@string/large_text"
+            />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/marge"
-            android:text="@string/large_text" />
+            android:gravity="center"
+            android:text="@string/show_more"
+            android:textColor="@color/design_default_color_primary"
+            android:onClick="showMore"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#c0c0c0"
+            android:layout_marginBottom="@dimen/marge"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="75"
+                android:layout_marginRight="@dimen/marge"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:text="@string/director"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                android:text="George Lucas"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="75"
+                android:layout_marginRight="@dimen/marge"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:text="@string/actors"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                android:text="Mark Hamill, Harisson Ford, Carrie Fisher, Peter Cushing"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="75"
+                android:layout_marginRight="@dimen/marge"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:text="@string/awards"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                android:text="Won 6 Oscars. Another 52 wins and 28 nominations."
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#c0c0c0"
+            android:layout_marginTop="@dimen/marge"
+            />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
