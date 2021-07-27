@@ -24,10 +24,14 @@ public class MainActivity extends AppCompatActivity {
         mTextViewWelcome.setText(getString(R.string.welcome, "JP"));
         Toast.makeText(this, mTextViewWelcome.getText(), Toast.LENGTH_SHORT).show();
 
-        mButtonSearch = (Button) findViewById(R.id.button_search);
-        mButtonSearch.setOnClickListener(
-            view -> Log.d("Chez Moi", "Click sur bouton rechercher")
-        );
-
+//        mButtonSearch = (Button) findViewById(R.id.button_search);
+//        mButtonSearch.setOnClickListener(
+//            view -> Log.d("ChezMoi", "Click sur bouton rechercher")
+//        );
     }
+
+    public void defaultOnClickSearchButton(View view) {
+        Log.d("ChezMoi", "Click sur bouton rechercher avec methode par defaut");
+    }
+
 }
