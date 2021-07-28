@@ -2,6 +2,7 @@ package fr.jpsave.android.movieapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import fr.jpsave.android.movieapp.constants.Constants;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Context mContext;
     private TextView mTextViewWelcome;
     private LinearLayout mLinearLayoutFilm1;
     private LinearLayout mLinearLayoutFilm2;
@@ -23,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Utile pour les class anonymes comme les onClickListener
+        mContext = this;
 
         Log.d("ChezMoi Processus", "MainActivity: onCreate()");
 
@@ -48,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void defaultOnClickSearchButton(View view) {
         Log.d("ChezMoi", "Click sur bouton rechercher avec methode par defaut");
+        Toast.makeText(mContext, "Click sur Bouton rechercher", Toast.LENGTH_SHORT).show();
     }
 
     public void onClickFilm(String filmTitle) {

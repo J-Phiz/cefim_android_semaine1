@@ -66,12 +66,14 @@
             android:text="@string/large_text"
             />
         <TextView
+            android:id="@+id/text_view_description_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/marge"
             android:gravity="center"
             android:text="@string/show_more"
             android:textColor="@color/design_default_color_primary"
-            android:onClick="showMore"
+            android:onClick="showMoreLess"
             />
         <View
             android:layout_width="match_parent"

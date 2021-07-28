@@ -18,6 +18,8 @@ import fr.jpsave.android.movieapp.constants.Constants;
 public class MovieActivity extends AppCompatActivity {
 
     private TextView mTvDescription;
+    private TextView mTvDescriptionLabel;
+    private boolean showMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +48,23 @@ public class MovieActivity extends AppCompatActivity {
         });
 
         mTvDescription = findViewById(R.id.text_view_description);
-        mTvDescription.setText(
-                String.format("%s...", getText(R.string.large_text).subSequence(0, 200))
-        );
-
+        mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
+        showMore = true;
+        showMoreLess(null);
     }
 
-    public void showMore(View view) {
-        mTvDescription.setText(getString(R.string.large_text));
+    public void showMoreLess(View view) {
+        if (!showMore) {
+            mTvDescription.setText(getString(R.string.large_text));
+            showMore = true;
+            mTvDescriptionLabel.setText(R.string.show_less);
+        } else {
+            mTvDescription.setText(
+                    String.format("%s...", getText(R.string.large_text).subSequence(0, 200))
+            );
+            showMore = false;
+            mTvDescriptionLabel.setText(R.string.show_more);
+        }
     }
 
     @Override

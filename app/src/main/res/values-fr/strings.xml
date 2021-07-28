@@ -19,4 +19,5 @@
     <string name="awards">Récompenses</string>
     <string name="show_more">Lire la suite</string>
     <string name="favorite_added">Ajouter à vos favoris</string>
+    <string name="show_less">Moins</string>
 </resources>
