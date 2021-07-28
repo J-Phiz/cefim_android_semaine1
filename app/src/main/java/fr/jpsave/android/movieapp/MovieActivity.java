@@ -27,6 +27,7 @@ public class MovieActivity extends AppCompatActivity {
     private TextView mTvDescription;
     private TextView mTvDescriptionLabel;
     private boolean mShowMore;
+    private boolean mIsFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +49,20 @@ public class MovieActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, R.string.favorite_added, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                String message = "UnKnown";
 
+                if (mIsFavorite) {
+                    message = getString(R.string.favorite_removed);
+                    fab.setImageResource(R.drawable.ic_baseline_favorite_border_24);
+                    mIsFavorite = false;
+                } else {
+                    message = getString(R.string.favorite_added);
+                    fab.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    mIsFavorite = true;
+                }
+
+                Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
