@@ -11,15 +11,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import fr.jpsave.android.movieapp.constants.Constants;
+import fr.jpsave.android.movieapp.constants.StaticMovies;
+import fr.jpsave.android.movieapp.model.Movie;
 
 public class MovieActivity extends AppCompatActivity {
 
-    private TextView mTvDescription;
     private TextView mTvDescriptionLabel;
-    private boolean showMore;
+    private boolean mShowMore;
+    private Movie mMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +50,48 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
-        mTvDescription = findViewById(R.id.text_view_description);
+        mMovie = StaticMovies.FillStarWars();
+        updateUI(mMovie);
+
         mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
-        showMore = true;
+        mShowMore = true;
         showMoreLess(null);
     }
 
     public void showMoreLess(View view) {
-        if (!showMore) {
-            mTvDescription.setText(getString(R.string.large_text));
-            showMore = true;
+        TextView tvDescription = findViewById(R.id.text_view_description);
+
+        if (!mShowMore) {
+            tvDescription.setText(mMovie.getDescription());
+            mShowMore = true;
             mTvDescriptionLabel.setText(R.string.show_less);
         } else {
-            mTvDescription.setText(
-                    String.format("%s...", getText(R.string.large_text).subSequence(0, 200))
+            tvDescription.setText(
+                    String.format("%s...", mMovie.getDescription().subSequence(0, 200))
             );
-            showMore = false;
+            mShowMore = false;
             mTvDescriptionLabel.setText(R.string.show_more);
         }
+    }
+
+    private void updateUI(Movie movie) {
+        TextView tvTitle = findViewById(R.id.text_view_title);
+        TextView tvReleaseDate = findViewById(R.id.text_view_releaseDate);
+        TextView tvGenre = findViewById(R.id.text_view_genre);
+        TextView tvDescription = findViewById(R.id.text_view_description);
+        TextView tvDirector = findViewById(R.id.text_view_director);
+        TextView tvActors = findViewById(R.id.text_view_actors);
+        TextView tvAwards = findViewById(R.id.text_view_awards);
+        ImageView ivImage = findViewById(R.id.image_view_image);
+
+        tvTitle.setText(movie.getTitle());
+        tvReleaseDate.setText(movie.getReleaseDate().toString());
+        tvGenre.setText(movie.getGenre());
+        tvDescription.setText(movie.getDescription());
+        tvDirector.setText(movie.getDirector());
+        tvActors.setText(movie.getActors());
+        tvAwards.setText(movie.getAwards());
+        ivImage.setImageResource(movie.getImageId());
     }
 
     @Override

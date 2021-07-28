@@ -21,9 +21,9 @@
             android:layout_marginBottom="@dimen/marge_title"
             >
             <ImageView
+                android:id="@+id/image_view_image"
                 android:layout_width="@dimen/image_width"
                 android:layout_height="@dimen/image_height"
-                android:src="@drawable/star_wars_ep4"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -32,21 +32,24 @@
                 android:orientation="vertical"
                 >
                 <TextView
+                    android:id="@+id/text_view_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_large"
                     android:textStyle="bold"
-                    android:text="Star Wars: Episode IV - A New Hope"
+                    android:text="Unknown"
                     />
                 <TextView
+                    android:id="@+id/text_view_releaseDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25 Mai 1977"
+                    android:text="Unknown"
                     />
                 <TextView
+                    android:id="@+id/text_view_genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Action, Adventure, Fantasy, Sci-Fi"
+                    android:text="Unknown"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -63,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/marge"
-            android:text="@string/large_text"
+            android:text="Unknown"
             />
         <TextView
             android:id="@+id/text_view_description_label"
@@ -96,10 +99,11 @@
                 android:text="@string/director"
                 />
             <TextView
+                android:id="@+id/text_view_director"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="25"
-                android:text="George Lucas"
+                android:text="Unknown"
                 />
         </LinearLayout>
         <LinearLayout
@@ -117,10 +121,11 @@
                 android:text="@string/actors"
                 />
             <TextView
+                android:id="@+id/text_view_actors"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="25"
-                android:text="Mark Hamill, Harisson Ford, Carrie Fisher, Peter Cushing"
+                android:text="Unknown"
                 />
         </LinearLayout>
         <LinearLayout
@@ -138,10 +143,11 @@
                 android:text="@string/awards"
                 />
             <TextView
+                android:id="@+id/text_view_awards"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="25"
-                android:text="Won 6 Oscars. Another 52 wins and 28 nominations."
+                android:text="Unknown"
                 />
         </LinearLayout>
         <View
