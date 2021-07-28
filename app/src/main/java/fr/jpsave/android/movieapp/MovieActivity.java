@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import fr.jpsave.android.movieapp.constants.Constants;
+import fr.jpsave.android.movieapp.constants.JSONMovies;
 import fr.jpsave.android.movieapp.constants.StaticMovies;
 import fr.jpsave.android.movieapp.model.Movie;
 
@@ -50,7 +52,9 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
-        mMovie = StaticMovies.FillStarWars();
+        Gson gson = new Gson();
+        mMovie = gson.fromJson(JSONMovies.starWars, Movie.class);
+        //mMovie = StaticMovies.FillStarWars();
         updateUI(mMovie);
 
         mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
@@ -62,12 +66,12 @@ public class MovieActivity extends AppCompatActivity {
         TextView tvDescription = findViewById(R.id.text_view_description);
 
         if (!mShowMore) {
-            tvDescription.setText(mMovie.getDescription());
+            tvDescription.setText(mMovie.getPlot());
             mShowMore = true;
             mTvDescriptionLabel.setText(R.string.show_less);
         } else {
             tvDescription.setText(
-                    String.format("%s...", mMovie.getDescription().subSequence(0, 200))
+                    String.format("%s...", mMovie.getPlot().subSequence(0, 200))
             );
             mShowMore = false;
             mTvDescriptionLabel.setText(R.string.show_more);
@@ -85,13 +89,13 @@ public class MovieActivity extends AppCompatActivity {
         ImageView ivImage = findViewById(R.id.image_view_image);
 
         tvTitle.setText(movie.getTitle());
-        tvReleaseDate.setText(movie.getReleaseDate().toString());
+        tvReleaseDate.setText(movie.getReleased());
         tvGenre.setText(movie.getGenre());
-        tvDescription.setText(movie.getDescription());
+        tvDescription.setText(movie.getPlot());
         tvDirector.setText(movie.getDirector());
         tvActors.setText(movie.getActors());
         tvAwards.setText(movie.getAwards());
-        ivImage.setImageResource(movie.getImageId());
+        ivImage.setImageResource(movie.getPosterId());
     }
 
     @Override
