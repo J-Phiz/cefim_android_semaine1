@@ -6,6 +6,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,7 +27,6 @@ public class MovieActivity extends AppCompatActivity {
     private TextView mTvDescription;
     private TextView mTvDescriptionLabel;
     private boolean mShowMore;
-    private Movie mMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,8 @@ public class MovieActivity extends AppCompatActivity {
         });
 
         Gson gson = new Gson();
-        mMovie = gson.fromJson(JSONMovies.starWars, Movie.class);
-        //mMovie = StaticMovies.FillStarWars();
-        updateUI(mMovie);
+        Movie movie = gson.fromJson(JSONMovies.starWars, Movie.class);
+        updateUI(movie);
 
         mTvDescription = findViewById(R.id.text_view_description);
         mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
@@ -97,7 +96,12 @@ public class MovieActivity extends AppCompatActivity {
         tvDirector.setText(movie.getDirector());
         tvActors.setText(movie.getActors());
         tvAwards.setText(movie.getAwards());
-        ivImage.setImageResource(movie.getPosterId());
+        if (movie.getPosterId() != 0) {
+            ivImage.setImageResource(movie.getPosterId());
+        } else {
+            Picasso.get().load(movie.getPoster()).into(ivImage);
+        }
+
     }
 
     @Override
