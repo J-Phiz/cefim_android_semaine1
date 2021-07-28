@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,6 +23,7 @@ import fr.jpsave.android.movieapp.model.Movie;
 
 public class MovieActivity extends AppCompatActivity {
 
+    private TextView mTvDescription;
     private TextView mTvDescriptionLabel;
     private boolean mShowMore;
     private Movie mMovie;
@@ -57,22 +59,22 @@ public class MovieActivity extends AppCompatActivity {
         //mMovie = StaticMovies.FillStarWars();
         updateUI(mMovie);
 
+        mTvDescription = findViewById(R.id.text_view_description);
         mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
         mShowMore = true;
         showMoreLess(null);
     }
 
     public void showMoreLess(View view) {
-        TextView tvDescription = findViewById(R.id.text_view_description);
 
         if (!mShowMore) {
-            tvDescription.setText(mMovie.getPlot());
+            mTvDescription.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            mTvDescription.setMaxLines(Integer.MAX_VALUE);
             mShowMore = true;
             mTvDescriptionLabel.setText(R.string.show_less);
         } else {
-            tvDescription.setText(
-                    String.format("%s...", mMovie.getPlot().subSequence(0, 200))
-            );
+            mTvDescription.setEllipsize(TextUtils.TruncateAt.END);
+            mTvDescription.setMaxLines(3);
             mShowMore = false;
             mTvDescriptionLabel.setText(R.string.show_more);
         }
