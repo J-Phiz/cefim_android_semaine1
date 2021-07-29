@@ -10,153 +10,171 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/marge"
-        >
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_view_no_internet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/marge_title"
-            >
-            <ImageView
-                android:id="@+id/image_view_image"
-                android:layout_width="@dimen/image_width"
-                android:layout_height="@dimen/image_height"
-                />
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/marge"
+            android:gravity="center_horizontal"
+            android:text="@string/no_internet"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_large"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout_movie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marge"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marge_title"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image_view_image"
+                    android:layout_width="@dimen/image_width"
+                    android:layout_height="@dimen/image_height" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_view_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unknown"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_view_releaseDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unknown" />
+
+                    <TextView
+                        android:id="@+id/text_view_genre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Unknown" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marge"
+                android:text="@string/about"
+                android:textSize="@dimen/text_size_medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_view_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marge"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="Unknown" />
+
+            <TextView
+                android:id="@+id/text_view_description_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/marge"
+                android:gravity="center"
+                android:onClick="showMoreLess"
+                android:text="@string/show_more"
+                android:textColor="@color/design_default_color_primary" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="@dimen/marge"
+                android:background="#c0c0c0" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="vertical"
-                >
+                android:orientation="horizontal">
+
                 <TextView
-                    android:id="@+id/text_view_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_large"
-                    android:textStyle="bold"
-                    android:text="Unknown"
-                    />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/marge"
+                    android:layout_weight="75"
+                    android:gravity="right"
+                    android:text="@string/director"
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:id="@+id/text_view_releaseDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Unknown"
-                    />
-                <TextView
-                    android:id="@+id/text_view_genre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Unknown"
-                    />
+                    android:id="@+id/text_view_director"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"
+                    android:text="Unknown" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/marge"
+                    android:layout_weight="75"
+                    android:gravity="right"
+                    android:text="@string/actors"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_view_actors"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"
+                    android:text="Unknown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/marge"
+                    android:layout_weight="75"
+                    android:gravity="right"
+                    android:text="@string/awards"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/text_view_awards"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="25"
+                    android:text="Unknown" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/marge"
+                android:background="#c0c0c0" />
         </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/marge"
-            android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold"
-            android:text="@string/about"
-            />
-        <TextView
-            android:id="@+id/text_view_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/marge"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:text="Unknown"
-            />
-        <TextView
-            android:id="@+id/text_view_description_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/marge"
-            android:gravity="center"
-            android:text="@string/show_more"
-            android:textColor="@color/design_default_color_primary"
-            android:onClick="showMoreLess"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#c0c0c0"
-            android:layout_marginBottom="@dimen/marge"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="75"
-                android:layout_marginRight="@dimen/marge"
-                android:gravity="right"
-                android:textStyle="bold"
-                android:text="@string/director"
-                />
-            <TextView
-                android:id="@+id/text_view_director"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="25"
-                android:text="Unknown"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="75"
-                android:layout_marginRight="@dimen/marge"
-                android:gravity="right"
-                android:textStyle="bold"
-                android:text="@string/actors"
-                />
-            <TextView
-                android:id="@+id/text_view_actors"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="25"
-                android:text="Unknown"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="75"
-                android:layout_marginRight="@dimen/marge"
-                android:gravity="right"
-                android:textStyle="bold"
-                android:text="@string/awards"
-                />
-            <TextView
-                android:id="@+id/text_view_awards"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="25"
-                android:text="Unknown"
-                />
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="#c0c0c0"
-            android:layout_marginTop="@dimen/marge"
-            />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

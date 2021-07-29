@@ -1,5 +1,8 @@
 package fr.jpsave.android.movieapp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -15,7 +18,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.IOException;
 
 import fr.jpsave.android.movieapp.constants.Constants;
 import fr.jpsave.android.movieapp.constants.JSONMovies;
@@ -26,7 +32,7 @@ public class MovieActivity extends AppCompatActivity {
 
     private TextView mTvDescription;
     private TextView mTvDescriptionLabel;
-    private boolean mShowMore;
+    private boolean mShowMore = false;
     private boolean mIsFavorite = false;
 
     @Override
@@ -34,6 +40,9 @@ public class MovieActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie);
         Gson gson = new Gson();
+
+        mTvDescription = findViewById(R.id.text_view_description);
+        mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
 
         Log.d("ChezMoi Processus", "MovieActivity: onCreate()");
 
@@ -66,14 +75,18 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
-        Movie movie = gson.fromJson(params.getString(Constants.MOVIE_JSON_INFO_KEY), Movie.class);
-        //Movie movie = gson.fromJson(JSONMovies.starWars, Movie.class);
-        updateUI(movie);
 
-        mTvDescription = findViewById(R.id.text_view_description);
-        mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
-        mShowMore = true;
-        showMoreLess(null);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            // Oui il y a Internet je lance un appel API
+
+
+        } else {
+            // Non... J’affiche un message à l’utilisateur
+            ((TextView) findViewById(R.id.text_view_no_internet)).setVisibility(View.VISIBLE);
+            ((LinearLayout) findViewById(R.id.linear_layout_movie)).setVisibility(View.GONE);
+        }
     }
 
     public void showMoreLess(View view) {
@@ -92,28 +105,29 @@ public class MovieActivity extends AppCompatActivity {
     }
 
     private void updateUI(Movie movie) {
-        TextView tvTitle = findViewById(R.id.text_view_title);
-        TextView tvReleaseDate = findViewById(R.id.text_view_releaseDate);
-        TextView tvGenre = findViewById(R.id.text_view_genre);
-        TextView tvDescription = findViewById(R.id.text_view_description);
-        TextView tvDirector = findViewById(R.id.text_view_director);
-        TextView tvActors = findViewById(R.id.text_view_actors);
-        TextView tvAwards = findViewById(R.id.text_view_awards);
-        ImageView ivImage = findViewById(R.id.image_view_image);
+        if (movie != null) {
+            TextView tvTitle = findViewById(R.id.text_view_title);
+            TextView tvReleaseDate = findViewById(R.id.text_view_releaseDate);
+            TextView tvGenre = findViewById(R.id.text_view_genre);
+            TextView tvDescription = findViewById(R.id.text_view_description);
+            TextView tvDirector = findViewById(R.id.text_view_director);
+            TextView tvActors = findViewById(R.id.text_view_actors);
+            TextView tvAwards = findViewById(R.id.text_view_awards);
+            ImageView ivImage = findViewById(R.id.image_view_image);
 
-        tvTitle.setText(movie.getTitle());
-        tvReleaseDate.setText(movie.getReleased());
-        tvGenre.setText(movie.getGenre());
-        tvDescription.setText(movie.getPlot());
-        tvDirector.setText(movie.getDirector());
-        tvActors.setText(movie.getActors());
-        tvAwards.setText(movie.getAwards());
-        if (movie.getPosterId() != 0) {
-            ivImage.setImageResource(movie.getPosterId());
-        } else {
-            Picasso.get().load(movie.getPoster()).into(ivImage);
+            tvTitle.setText(movie.getTitle());
+            tvReleaseDate.setText(movie.getReleased());
+            tvGenre.setText(movie.getGenre());
+            tvDescription.setText(movie.getPlot());
+            tvDirector.setText(movie.getDirector());
+            tvActors.setText(movie.getActors());
+            tvAwards.setText(movie.getAwards());
+            if (movie.getPosterId() != 0) {
+                ivImage.setImageResource(movie.getPosterId());
+            } else {
+                Picasso.get().load(movie.getPoster()).into(ivImage);
+            }
         }
-
     }
 
     @Override
