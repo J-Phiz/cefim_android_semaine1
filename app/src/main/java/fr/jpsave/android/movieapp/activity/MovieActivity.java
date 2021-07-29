@@ -114,7 +114,7 @@ public class MovieActivity extends AppCompatActivity {
 
                     // Attendre juste pour voir le progressBar
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

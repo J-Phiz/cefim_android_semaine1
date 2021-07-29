@@ -78,8 +78,11 @@ public class SearchActivity extends AppCompatActivity {
                                 // Code exécuté dans le Thread principale
                                 Gson gson = new Gson();
                                 Search search = (gson.fromJson(stringJson, Search.class));
-                                mMovies.addAll(Arrays.asList(search.getSearch()));
-                                mSearchAdapter.notifyDataSetChanged();
+                                mMovies.removeAll(mMovies);
+                                if (search != null) {
+                                    mMovies.addAll(Arrays.asList(search.getSearch()));
+                                    mSearchAdapter.notifyDataSetChanged();
+                                }
                             }
                         });
                     }
