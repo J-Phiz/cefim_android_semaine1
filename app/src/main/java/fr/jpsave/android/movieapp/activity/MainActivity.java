@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import fr.jpsave.android.movieapp.R;
+import fr.jpsave.android.movieapp.adapter.SearchAdapter;
 import fr.jpsave.android.movieapp.constants.Constants;
 import fr.jpsave.android.movieapp.constants.JSONMovies;
 import fr.jpsave.android.movieapp.constants.StaticMovies;
@@ -63,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     public void defaultOnClickSearchButton(View view) {
         Log.d("ChezMoi", "Click sur bouton rechercher avec methode par defaut");
         Toast.makeText(mContext, "Click sur Bouton rechercher", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 
     public void onClickFilm(String filmID, String filmTitle, String filmInfo) {
