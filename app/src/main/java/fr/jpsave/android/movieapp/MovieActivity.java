@@ -32,8 +32,8 @@ public class MovieActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_movie);
+        Gson gson = new Gson();
 
         Log.d("ChezMoi Processus", "MovieActivity: onCreate()");
 
@@ -66,8 +66,8 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
-        Gson gson = new Gson();
-        Movie movie = gson.fromJson(JSONMovies.starWars, Movie.class);
+        Movie movie = gson.fromJson(params.getString(Constants.MOVIE_JSON_INFO_KEY), Movie.class);
+        //Movie movie = gson.fromJson(JSONMovies.starWars, Movie.class);
         updateUI(movie);
 
         mTvDescription = findViewById(R.id.text_view_description);
