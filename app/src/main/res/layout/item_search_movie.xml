@@ -3,6 +3,7 @@
     android:layout_width="@dimen/miniature_width"
     android:layout_height="@dimen/miniature_height"
     android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground"
     >
     <ImageView
         android:id="@+id/image_view_item_image"
@@ -28,5 +29,4 @@
         android:layout_marginRight="@dimen/text_margin"
         android:text="1977"
         />
-
 </LinearLayout>
