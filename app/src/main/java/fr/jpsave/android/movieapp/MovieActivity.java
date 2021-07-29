@@ -27,6 +27,11 @@ import fr.jpsave.android.movieapp.constants.Constants;
 import fr.jpsave.android.movieapp.constants.JSONMovies;
 import fr.jpsave.android.movieapp.constants.StaticMovies;
 import fr.jpsave.android.movieapp.model.Movie;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -34,6 +39,7 @@ public class MovieActivity extends AppCompatActivity {
     private TextView mTvDescriptionLabel;
     private boolean mShowMore = false;
     private boolean mIsFavorite = false;
+    private OkHttpClient mOkHttpClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,7 @@ public class MovieActivity extends AppCompatActivity {
 
         mTvDescription = findViewById(R.id.text_view_description);
         mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
+        mOkHttpClient = new OkHttpClient();
 
         Log.d("ChezMoi Processus", "MovieActivity: onCreate()");
 
@@ -81,6 +88,27 @@ public class MovieActivity extends AppCompatActivity {
         if (networkInfo != null && networkInfo.isConnected()) {
             // Oui il y a Internet je lance un appel API
 
+            String url = getString(R.string.movie_base_url) + "&i=tt0076759";
+            Request request = new Request.Builder().url(url).build();
+            mOkHttpClient.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.d("ChezMoi", "Movie API Communication failure");
+                }
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    final String stringJson = response.body().string();
+                    Log.d("ChezMoi", "Movie API Communication OK\n" + stringJson);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            // Code exécuté dans le Thread principale
+                            Gson gson = new Gson();
+                            updateUI(gson.fromJson(stringJson, Movie.class));
+                        }
+                    });
+                }
+            });
 
         } else {
             // Non... J’affiche un message à l’utilisateur
