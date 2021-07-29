@@ -96,7 +96,7 @@ public class MovieActivity extends AppCompatActivity {
             mPbloading.setVisibility(View.VISIBLE);
             mPbloading.animate();
 
-            String url = getString(R.string.movie_base_url) + "&i=tt0076759";
+            String url = getString(R.string.movie_base_url) + "&i=" + params.getString(Constants.MOVIE_ID_KEY);
             Request request = new Request.Builder().url(url).build();
             mOkHttpClient.newCall(request).enqueue(new Callback() {
                 @Override

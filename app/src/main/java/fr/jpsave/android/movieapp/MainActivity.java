@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mLinearLayoutFilm1 = (LinearLayout) findViewById(R.id.linear_layout_film1);
         mLinearLayoutFilm1.setOnClickListener(
             view -> this.onClickFilm(
+                   "tt0076759",
                 ((TextView) view.findViewById(R.id.text_view_film1)).getText().toString(),
                     JSONMovies.starWars
             )
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mLinearLayoutFilm2.setOnClickListener(view -> {
             Gson gson = new Gson();
             this.onClickFilm(
+                    "tt0103776",
                 ((TextView) view.findViewById(R.id.text_view_film2)).getText().toString(),
                 gson.toJson(StaticMovies.FillBatman())
             );
@@ -63,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(mContext, "Click sur Bouton rechercher", Toast.LENGTH_SHORT).show();
     }
 
-    public void onClickFilm(String filmTitle, String filmInfo) {
+    public void onClickFilm(String filmID, String filmTitle, String filmInfo) {
         Intent intent = new Intent(this, MovieActivity.class);
+        intent.putExtra(Constants.MOVIE_ID_KEY, filmID);
         intent.putExtra(Constants.MOVIE_TITLE_KEY, filmTitle);
         intent.putExtra(Constants.MOVIE_JSON_INFO_KEY, filmInfo);
         startActivity(intent);
