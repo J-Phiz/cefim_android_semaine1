@@ -1,4 +1,4 @@
-package fr.jpsave.android.movieapp;
+package fr.jpsave.android.movieapp.activity;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import fr.jpsave.android.movieapp.R;
 import fr.jpsave.android.movieapp.constants.Constants;
 import fr.jpsave.android.movieapp.constants.JSONMovies;
 import fr.jpsave.android.movieapp.constants.StaticMovies;

@@ -1,4 +1,4 @@
-package fr.jpsave.android.movieapp;
+package fr.jpsave.android.movieapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import fr.jpsave.android.movieapp.R;
 import fr.jpsave.android.movieapp.constants.Constants;
 import fr.jpsave.android.movieapp.constants.JSONMovies;
 import fr.jpsave.android.movieapp.constants.StaticMovies;
