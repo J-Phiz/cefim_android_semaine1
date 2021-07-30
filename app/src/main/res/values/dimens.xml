@@ -4,13 +4,14 @@
     <dimen name="marge_image">8dp</dimen>
     <dimen name="marge_title">32dp</dimen>
     <dimen name="marge_subtitle">16dp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
     <dimen name="text_size_large">22sp</dimen>
-    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_width">100dp</dimen>
     <dimen name="image_height">140dp</dimen>
-    <dimen name="miniature_width">120dp</dimen>
-    <dimen name="miniature_height">200dp</dimen>
+    <dimen name="miniature_width">110dp</dimen>
+    <dimen name="miniature_height">203dp</dimen>
     <dimen name="app_bar_height">180dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="text_margin">8dp</dimen>
+    <dimen name="text_margin">6dp</dimen>
 </resources>

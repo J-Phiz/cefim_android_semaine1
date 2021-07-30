@@ -45,7 +45,6 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
     private SearchView mSvSearch;
     private RecyclerView mRecyclerView;
     private SearchAdapter mSearchAdapter;
-    private OkHttpClient mOkHttpClient;
     private ProgressBar mPbloading;
     private LinearLayout mLlAllContent;
 
@@ -56,7 +55,6 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
         setContentView(R.layout.activity_search);
 
         mContext = this;
-        mOkHttpClient = new OkHttpClient();
         mMovies = new ArrayList<>();
         mSvSearch = findViewById(R.id.search_view);
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -114,8 +112,8 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
         }
     }
 
-@Override
-public void onAPINoInternetAccess() {
+    @Override
+    public void onAPINoInternetAccess() {
         failure(R.string.no_internet);
-        }
-        }
+    }
+}
