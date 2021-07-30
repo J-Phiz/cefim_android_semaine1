@@ -104,11 +104,15 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
         Gson gson = new Gson();
         Search search = (gson.fromJson(json, Search.class));
         mMovies.removeAll(mMovies);
-        if (search != null) {
+        if (search != null && search.getResponse().equals("True")) {
             mMovies.addAll(Arrays.asList(search.getSearch()));
             mSearchAdapter.notifyDataSetChanged();
         } else {
-            failure(R.string.no_reseult);
+            if (search != null && search.getError().equals("Too many results.")) {
+                failure(R.string.too_many_results);
+            } else {
+                failure(R.string.no_reseult);
+            }
         }
     }
 

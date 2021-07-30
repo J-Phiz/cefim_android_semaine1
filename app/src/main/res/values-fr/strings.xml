@@ -25,4 +25,5 @@
     <string name="movie_base_url">http://www.omdbapi.com/?apikey=bf4e1adb</string>
     <string name="no_movies_db_access">Pas d\'accès à la base de données des films</string>
     <string name="no_reseult">Pas de résultat</string>
+    <string name="too_many_results">Trop de résultats, veuillez compléter votre recherche</string>
 </resources>
