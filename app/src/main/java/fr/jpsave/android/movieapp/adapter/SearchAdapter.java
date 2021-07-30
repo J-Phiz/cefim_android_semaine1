@@ -71,7 +71,10 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         Movie movie = mMovies.get(position);
         holder.mTvItemTitle.setText(movie.getTitle());
         holder.mTvItemReleaseDate.setText(movie.getYear());
-        Picasso.get().load(movie.getPoster()).into(holder.mIvImage);
+        Picasso.get().load(movie.getPoster())
+                .placeholder(R.drawable.ic_baseline_image_24)
+                .error(R.drawable.ic_baseline_image_24)
+                .into(holder.mIvImage);
         holder.mMovie = movie;
     }
 
