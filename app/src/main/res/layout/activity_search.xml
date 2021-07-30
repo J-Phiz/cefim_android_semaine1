@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <SearchView
-        android:id="@+id/search_view"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/text_view_no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/marge"
+        android:gravity="center_horizontal"
+        android:text="@string/no_internet"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_large"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        />
+    <ProgressBar
+        android:id="@+id/progress_bar_load_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
+        android:layout_centerInParent="true"
+        android:progressTint="@color/design_default_color_primary"
+        android:visibility="invisible"
         />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
+        android:id="@+id/linear_layout_movies_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>
