@@ -106,4 +106,6 @@
     <string name="favorite_removed">Removed to your favorite</string>
     <string name="no_internet">No Internet Access</string>
     <string name="movie_base_url">http://www.omdbapi.com/?apikey=bf4e1adb</string>
+    <string name="no_movies_db_access">No Movies Database Access</string>
+    <string name="no_reseult">No Result</string>
 </resources>

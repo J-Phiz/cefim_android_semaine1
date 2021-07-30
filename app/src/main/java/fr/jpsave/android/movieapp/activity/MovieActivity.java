@@ -1,8 +1,5 @@
 package fr.jpsave.android.movieapp.activity;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -22,26 +19,19 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.IOException;
 
 import fr.jpsave.android.movieapp.R;
+import fr.jpsave.android.movieapp.client.ClientAPI;
 import fr.jpsave.android.movieapp.constants.Constants;
-import fr.jpsave.android.movieapp.constants.JSONMovies;
-import fr.jpsave.android.movieapp.constants.StaticMovies;
 import fr.jpsave.android.movieapp.model.Movie;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
-public class MovieActivity extends AppCompatActivity {
+public class MovieActivity extends AppCompatActivity implements ClientAPI {
 
     private TextView mTvDescription;
     private TextView mTvDescriptionLabel;
+    private TextView mTvError;
     private boolean mShowMore = false;
     private boolean mIsFavorite = false;
-    private OkHttpClient mOkHttpClient;
     private ProgressBar mPbloading;
     private LinearLayout mLlAllContent;
 
@@ -52,10 +42,9 @@ public class MovieActivity extends AppCompatActivity {
 
         mTvDescription = findViewById(R.id.text_view_description);
         mTvDescriptionLabel = findViewById(R.id.text_view_description_label);
+        mTvError = findViewById(R.id.text_view_no_internet);
         mPbloading = findViewById(R.id.progress_bar_load);
         mLlAllContent =  findViewById(R.id.linear_layout_movie);
-
-        mOkHttpClient = new OkHttpClient();
 
         Log.d("ChezMoi Processus", "MovieActivity: onCreate()");
 
@@ -88,56 +77,16 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
 
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Oui il y a Internet je lance un appel API
+        mTvError.setVisibility(View.INVISIBLE);
+        mLlAllContent.setVisibility(View.INVISIBLE);
+        mPbloading.setVisibility(View.VISIBLE);
+        mPbloading.animate();
 
-            mLlAllContent.setVisibility(View.INVISIBLE);
-            mPbloading.setVisibility(View.VISIBLE);
-            mPbloading.animate();
-
-            String url = getString(R.string.movie_base_url) + "&i=" + params.getString(Constants.MOVIE_ID_KEY);
-            Request request = new Request.Builder().url(url).build();
-            mOkHttpClient.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.d("ChezMoi", "Movie API Communication failure");
-                    ((TextView) findViewById(R.id.text_view_no_internet)).setVisibility(View.VISIBLE);
-                    mLlAllContent.setVisibility(View.INVISIBLE);
-                    mPbloading.setVisibility(View.GONE);
-                }
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    final String stringJson = response.body().string();
-                    Log.d("ChezMoi", "Movie API Communication OK\n" + stringJson);
-
-                    // Attendre juste pour voir le progressBar
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Code exécuté dans le Thread principale
-                            Gson gson = new Gson();
-                            updateUI(gson.fromJson(stringJson, Movie.class));
-                            mPbloading.setVisibility(View.GONE);
-                            mLlAllContent.setVisibility(View.VISIBLE);
-                        }
-                    });
-                }
-            });
-
-        } else {
-            // Non... J’affiche un message à l’utilisateur
-            ((TextView) findViewById(R.id.text_view_no_internet)).setVisibility(View.VISIBLE);
-            mLlAllContent.setVisibility(View.INVISIBLE);
-            mPbloading.setVisibility(View.GONE);
-        }
+        callAPI(
+            this,
+            getString(R.string.movie_base_url) +
+                        "&plot=full&i=" + params.getString(Constants.MOVIE_ID_KEY)
+        );
     }
 
     public void showMoreLess(View view) {
@@ -180,6 +129,40 @@ public class MovieActivity extends AppCompatActivity {
             }
         }
     }
+
+    private void failure(int msgId) {
+        mTvError.setText(msgId);
+        mTvError.setVisibility(View.VISIBLE);
+        mLlAllContent.setVisibility(View.INVISIBLE);
+        mPbloading.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onAPIFailure() {
+        failure(R.string.no_movies_db_access);
+    }
+
+    @Override
+    public void onAPISuccess(String json) {
+        Gson gson = new Gson();
+        Movie movie = gson.fromJson(json, Movie.class);
+        if (movie != null) {
+            updateUI(movie);
+            mPbloading.setVisibility(View.GONE);
+            mLlAllContent.setVisibility(View.VISIBLE);
+        } else {
+            failure(R.string.no_reseult);
+        }
+    }
+
+    @Override
+    public void onAPINoInternetAccess() {
+        failure(R.string.no_internet);
+    }
+
+
+
+
 
     @Override
     protected void onDestroy() {

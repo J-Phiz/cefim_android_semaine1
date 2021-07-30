@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 
 import fr.jpsave.android.movieapp.R;
 import fr.jpsave.android.movieapp.adapter.SearchAdapter;
+import fr.jpsave.android.movieapp.client.ClientAPI;
 import fr.jpsave.android.movieapp.constants.Constants;
 import fr.jpsave.android.movieapp.constants.StaticMovies;
 import fr.jpsave.android.movieapp.model.Movie;
@@ -35,10 +37,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements ClientAPI {
 
-    private Context mContext;
+    private Activity mContext;
     private ArrayList<Movie> mMovies;
+    private TextView mTvError;
     private SearchView mSvSearch;
     private RecyclerView mRecyclerView;
     private SearchAdapter mSearchAdapter;
@@ -59,6 +62,7 @@ public class SearchActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
         mPbloading = findViewById(R.id.progress_bar_load_list);
         mLlAllContent =  findViewById(R.id.linear_layout_movies_list);
+        mTvError = findViewById(R.id.text_view_no_internet);
 
         // Manage Search View
         mSvSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -66,43 +70,7 @@ public class SearchActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String s) {
                 mPbloading.setVisibility(View.VISIBLE);
                 mPbloading.animate();
-                // Call API
-                String url = getString(R.string.movie_base_url) + "&s=" + s.replace(" ", "%20");
-                Request request = new Request.Builder().url(url).build();
-                mOkHttpClient.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Log.d("ChezMoi", "Movie API Communication failure");
-                        ((TextView) findViewById(R.id.text_view_no_internet)).setVisibility(View.VISIBLE);
-                        mPbloading.setVisibility(View.INVISIBLE);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        final String stringJson = response.body().string();
-                        Log.d("ChezMoi", "Movie API Communication OK\n" + stringJson);
-                        // Attendre juste pour voir le progressBar
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // Code exécuté dans le Thread principale
-                                mPbloading.setVisibility(View.GONE);
-                                Gson gson = new Gson();
-                                Search search = (gson.fromJson(stringJson, Search.class));
-                                mMovies.removeAll(mMovies);
-                                if (search != null) {
-                                    mMovies.addAll(Arrays.asList(search.getSearch()));
-                                    mSearchAdapter.notifyDataSetChanged();
-                                }
-                            }
-                        });
-                    }
-                });
+                callAPI(mContext, getString(R.string.movie_base_url) + "&s=" + s.replace(" ", "%20"));
                 return false;
             }
 
@@ -117,17 +85,37 @@ public class SearchActivity extends AppCompatActivity {
         mSearchAdapter = new SearchAdapter(mContext, mMovies);
         mRecyclerView.setAdapter(mSearchAdapter);
 
-        // Manage Internet Access
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // Oui il y a Internet je lance un appel API
-            mLlAllContent.setVisibility(View.VISIBLE);
+        mLlAllContent.setVisibility(View.VISIBLE);
+    }
+
+    private void failure(int msgId) {
+        mTvError.setText(msgId);
+        mTvError.setVisibility(View.VISIBLE);
+        mLlAllContent.setVisibility(View.INVISIBLE);
+        mPbloading.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void onAPIFailure() {
+        failure(R.string.no_movies_db_access);
+    }
+
+    @Override
+    public void onAPISuccess(String json) {
+        mPbloading.setVisibility(View.GONE);
+        Gson gson = new Gson();
+        Search search = (gson.fromJson(json, Search.class));
+        mMovies.removeAll(mMovies);
+        if (search != null) {
+            mMovies.addAll(Arrays.asList(search.getSearch()));
+            mSearchAdapter.notifyDataSetChanged();
         } else {
-            // Non... J’affiche un message à l’utilisateur
-            ((TextView) findViewById(R.id.text_view_no_internet)).setVisibility(View.VISIBLE);
-            mLlAllContent.setVisibility(View.INVISIBLE);
-            mPbloading.setVisibility(View.GONE);
+            failure(R.string.no_reseult);
         }
     }
-}
+
+@Override
+public void onAPINoInternetAccess() {
+        failure(R.string.no_internet);
+        }
+        }
