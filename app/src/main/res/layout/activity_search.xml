@@ -4,26 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <TextView
-        android:id="@+id/text_view_no_internet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/marge"
-        android:gravity="center_horizontal"
-        android:text="@string/no_internet"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_size_large"
-        android:visibility="invisible"
-        android:layout_centerInParent="true"
-        />
-    <ProgressBar
-        android:id="@+id/progress_bar_load_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:progressTint="@color/design_default_color_primary"
-        android:visibility="invisible"
-        />
     <LinearLayout
         android:id="@+id/linear_layout_movies_list"
         android:layout_width="match_parent"
@@ -43,4 +23,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar_load_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:progressTint="@color/design_default_color_primary"
+        android:visibility="invisible"
+        />
+    <TextView
+        android:id="@+id/text_view_no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/marge"
+        android:gravity="center_horizontal"
+        android:text="@string/no_internet"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_large"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"
+        />
 </RelativeLayout>

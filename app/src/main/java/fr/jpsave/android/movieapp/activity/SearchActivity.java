@@ -46,7 +46,6 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
     private RecyclerView mRecyclerView;
     private SearchAdapter mSearchAdapter;
     private ProgressBar mPbloading;
-    private LinearLayout mLlAllContent;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -59,13 +58,13 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
         mSvSearch = findViewById(R.id.search_view);
         mRecyclerView = findViewById(R.id.recycler_view);
         mPbloading = findViewById(R.id.progress_bar_load_list);
-        mLlAllContent =  findViewById(R.id.linear_layout_movies_list);
         mTvError = findViewById(R.id.text_view_no_internet);
 
         // Manage Search View
         mSvSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                mTvError.setVisibility(View.INVISIBLE);
                 mPbloading.setVisibility(View.VISIBLE);
                 mPbloading.animate();
                 callAPI(mContext, getString(R.string.movie_base_url) + "&s=" + s.replace(" ", "%20"));
@@ -82,15 +81,12 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mSearchAdapter = new SearchAdapter(mContext, mMovies);
         mRecyclerView.setAdapter(mSearchAdapter);
-
-        mLlAllContent.setVisibility(View.VISIBLE);
     }
 
     private void failure(int msgId) {
         mTvError.setText(msgId);
         mTvError.setVisibility(View.VISIBLE);
-        mLlAllContent.setVisibility(View.INVISIBLE);
-        mPbloading.setVisibility(View.INVISIBLE);
+        mPbloading.setVisibility(View.GONE);
     }
 
     @Override
@@ -100,12 +96,12 @@ public class SearchActivity extends AppCompatActivity implements ClientAPI {
 
     @Override
     public void onAPISuccess(String json) {
-        mPbloading.setVisibility(View.GONE);
         Gson gson = new Gson();
         Search search = (gson.fromJson(json, Search.class));
         mMovies.removeAll(mMovies);
         if (search != null && search.getResponse().equals("True")) {
             mMovies.addAll(Arrays.asList(search.getSearch()));
+            mPbloading.setVisibility(View.INVISIBLE);
             mSearchAdapter.notifyDataSetChanged();
         } else {
             if (search != null && search.getError().equals("Too many results.")) {
